@@ -36,19 +36,19 @@ def hh_parse(base_url, headers):
         for div in divs:  # для каждого дива
             try:        #проверить на наличие данных
                 title = div.find('a', attrs={'data-qa': 'vacancy-serp__vacancy-title'}).text
-                href = div.find('a', attrs={'data-qa': 'vacancy-serp__vacancy-title'})['href']
-                company = div.find('a', attrs={'data-qa': 'vacancy-serp__vacancy-employer'}).text
-                location = div.find('span', attrs={'data-qa': 'vacancy-serp__vacancy-address'}).text
-                respons = div.find('div', attrs={'data-qa': 'vacancy-serp__vacancy_snippet_responsibility'}).text
-                requir = div.find('div', attrs={'data-qa': 'vacancy-serp__vacancy_snippet_requirement'}).text
-                content = respons + ' ' + requir
+                #href = div.find('a', attrs={'data-qa': 'vacancy-serp__vacancy-title'})['href']
+                #company = div.find('a', attrs={'data-qa': 'vacancy-serp__vacancy-employer'}).text
+                #location = div.find('span', attrs={'data-qa': 'vacancy-serp__vacancy-address'}).text
+                #respons = div.find('div', attrs={'data-qa': 'vacancy-serp__vacancy_snippet_responsibility'}).text
+                #requir = div.find('div', attrs={'data-qa': 'vacancy-serp__vacancy_snippet_requirement'}).text
+                #content = respons + ' ' + requir
                 # try:
                 jobs.append({  # добавить в список jobs работы по типажу ниже
                     'title': title,
-                    'href': href,
-                    'company': company,
-                    'location': location,
-                    'content': content
+                    #'href': href,
+                    #'company': company,
+                    #'location': location,
+                    #'content': content
                 })
             except:
                 pass
@@ -59,10 +59,11 @@ def hh_parse(base_url, headers):
         print(len(jobs))
     else:
         print(request.status_code)
-    return jobs
+hh_parse(base_url, headers)
+'''return jobs
 
 def file_writer(jobs):
-    with open('parsed-jobs.csv', 'w') as file:
+    with open('parsed-jobs2.csv', 'w') as file:
         writer = csv.writer(file)
         writer.writerow(('Title', 'Link', 'Company', 'Location', 'Respons&Requists'))
         for job in jobs:
@@ -71,4 +72,4 @@ def file_writer(jobs):
 
 
 jobs = hh_parse(base_url, headers)
-file_writer(jobs)
+file_writer(jobs)'''
