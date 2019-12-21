@@ -36,25 +36,25 @@ import json
 
 
 def send_message(message): #-------------- begin func
-    request = apiai.ApiAI('b9f933e583d64505854404ec5c02f829').text_request() #-------request to ai on dialogflow
-    request.lang = 'ru' #-----language check
-    request.session_id = 'session_1'   #------- session check
-    request.query = message #--------
-    response = json.loads(request.getresponse().read().decode('utf-8'))
-    print(response['result']['fulfillment']['speech'])
+    request = apiai.ApiAI('b9f933e583d64505854404ec5c02f829').text_request() #-------подключение с отправкой запроса
+    request.lang = 'ru' #-----проверка языка
+    request.session_id = 'session_1'   #------- групировка от одного пользователя по id сессии
+    request.query = message #-------- запрос с сообщением от пользователя
+    response = json.loads(request.getresponse().read().decode('utf-8')) #-------получение овтета/прочтение/конвертировка в utf-8
+    print(response['result']['fulfillment']['speech'])#-------- печать ответа
     return response(['result'['action']])
 
 
 
-print('input message')
-message = input()
+print('input message') #-----призыв к действию/уточнение
+message = input() #----- сообщение
 action = None
 while True:
-    action = send_message(message)
+    action = send_message(message) #----- проверка чтобы action был не None
     if action == 'smalltalk.greetings.bye':
         break
-    message = input()
+    message = input() #------  повторный ввод
 
-send_message(input())
+send_message(input()) #---------вызов функции
 
 
